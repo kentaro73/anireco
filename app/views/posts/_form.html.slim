@@ -1,0 +1,28 @@
+- if post.errors.present?
+  ul#error_explanation.text-danger
+    - post.errors.full_messages.each do |msg|
+      li = msg
+
+= form_with model: @post, local: true do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, placeholder: "タイトルは必須です", class: 'form-control'
+  .form-group
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
+  .form-group
+    = f.label :episode
+    = f.number_field :episode, class: 'form-control'
+  .form-group
+    = f.label :broadcast
+    = f.text_field :broadcast, placeholder: "例)2020年春", class: 'form-control'
+  .form-group
+    = f.label :cast
+    = f.text_field :cast, placeholder: "複数記録する場合は/で区切ってください", class: 'form-control'
+  .form-group
+    = f.label :staff
+    = f.text_field :staff, class: 'form-control'
+  .form-group
+    = f.label :favorite_scene
+    = f.text_field :favorite_scene, class: 'form-control'
+  = f.submit nil, class: 'btn btn-primary'

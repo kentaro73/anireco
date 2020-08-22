@@ -7,6 +7,25 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      post: 投稿
+      user: ユーザー
+    attributes:
+      post:
+        id: ID
+        title: タイトル
+        staff: 制作
+        favorite_scene: 好きなシーン
+        created_at: 登録日時
+        updated_at: 更新日時
+        image: 作品画像
+        episode: 話数
+        broadcast: 放送日
+        cast: 声優
+      user:
+        name: 名前
+        avatar: アイコン
+
   date:
     abbr_day_names:
     - 日
