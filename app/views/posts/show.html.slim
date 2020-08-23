@@ -3,6 +3,7 @@
 
   .nav.justify-content-end
     = link_to "一覧", posts_path, class: 'nav-link'
+
   .post-frame.p-1.my-2
     .user
       - if @post.user.avatar.attached?
@@ -32,6 +33,7 @@
       tr
         th= Post.human_attribute_name(:favorite_scene)
         td= @post.favorite_scene.blank? ? "未登録" : @post.favorite_scene
+        
   - if current_user && @post.user_id == current_user.id 
     .text-right
       = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
