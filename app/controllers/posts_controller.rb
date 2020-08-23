@@ -8,9 +8,7 @@ class PostsController < ApplicationController
   end
 
 
-  def test
-    @posts = Post.all.order(created_at: :desc)
-  end
+
 
   def show
   end
