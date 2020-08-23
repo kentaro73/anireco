@@ -50,7 +50,6 @@ cast = Faker::Name.name
 staff = Faker::Company.name
 favorite_scene = Faker::Lorem.word
 
-
 # 話数
 
 episode = rand(10..100)
