@@ -1,0 +1,25 @@
+.user-description
+  .user
+    - if @user.avatar.attached?
+      .user-icon
+        = image_tag @user.avatar, size: "100x100", class: 'rouded-circle'
+    - else
+      .user-icon
+        = image_tag "default_icon.png", size: "100x100", class: 'rounded-circle'
+    .user-name.pt-3
+      = @user.name
+  .user-posted
+    .watched-anime.pt-3
+      p 今まで見たアニメ
+    .episode-count
+      span 総視聴話数:
+      span= "#{@user.posts.all.sum(:episode)}話"
+
+  .user-posts
+    - @user.posts.each do |post|
+      .anime-title
+        h1= post.title
+
+
+
+

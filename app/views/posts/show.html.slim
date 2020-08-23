@@ -4,12 +4,12 @@
   .nav.justify-content-end
     = link_to "一覧", posts_path, class: 'nav-link'
   .post-frame.p-1.my-2
-    / .user
-    /   - if @post.user.avatar.attached?
-    /     .user-icon= image_tag @post.user.avatar, size: "50x50", class: 'rounded-circle'
-    /   - else
-    /     .user_icon= image_tag "default_icon.png", size: "50x50", class: "rounded-circle"
-    /   .user-name= link_to @post.user.name, user_path(@post.user_id)
+    .user
+      - if @post.user.avatar.attached?
+        .user-icon= image_tag @post.user.avatar, size: "50x50", class: 'rounded-circle'
+      - else
+        .user_icon= image_tag "default_icon.png", size: "50x50", class: "rounded-circle"
+      .user-name= link_to @post.user.name, user_path(@post.user_id)
 
     .anime-image= image_tag @post.image.variant(resize_to_fit: [960, 960]), class: "img-fluid" if @post.image.attached?
     .anime-image= image_tag "no_image.jpg", size: "960",class: 'img-fluid' unless @post.image.attached?
@@ -32,8 +32,8 @@
       tr
         th= Post.human_attribute_name(:favorite_scene)
         td= @post.favorite_scene.blank? ? "未登録" : @post.favorite_scene
-  / - if current_user && @post.user_id == current_user.id 
-  .text-right
-    = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
-    = link_to '削除', @post, method: :delete, data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
+  - if current_user && @post.user_id == current_user.id 
+    .text-right
+      = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
+      = link_to '削除', @post, method: :delete, data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
 
