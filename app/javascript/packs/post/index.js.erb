@@ -1,0 +1,3 @@
+$('#post_lists').append("<%= escape_javascript(render partial: 'post_list', locals: { post: @posts }) %>");
+$("#view_more").replaceWith("<%= escape_javascript(
+link_to_next_page(@posts, 'さらに表示', remote: true, id: 'view_more')) %>");

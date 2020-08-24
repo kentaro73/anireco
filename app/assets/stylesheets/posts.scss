@@ -1,29 +1,48 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// 投稿スタイル
 .post-frame { 
   box-shadow: 0px 0px 5px;
   border: 2px solid paleturquoise;
   width: 100%;
   text-decoration: none;
+  .user {
+    display: flex;
+  }
+  .user-name {
+    padding: 5px 5px 0 5px;
+  }
+  .user-icon {
+    border-radius: 50%;
+  }
 }
 
+// アニメ画像
 .anime-image { 
   object-fit: cover;
   box-sizing: border-box;
   width: 100%;
 }
 
-.post-frame {
-  .user {
-    display: flex;
+// ページネーション
+.pagination{
+  li{
+    a {
+      border: none;
+      color: #696969;
+    }
+    a:hover {
+      border-radius: 15px;
+    }
   }
-  
-  .user-name {
-    padding: 5px 5px 0 5px;
+  .active {
+    a {
+      background: #93c9ff;
+      border-radius: 15px;
+    }
   }
-  
-  .user-icon {
-    border-radius: 50%;
-  }
-}  
+}
+
+

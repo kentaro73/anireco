@@ -1,0 +1,32 @@
+- @posts.each do |post|  
+  .post-frame.p-1.my-2= link_to post
+    .user
+      - if post.user.avatar.attached?
+        .user-icon
+          = image_tag post.user.avatar, size: "50x50", class: 'rounded-circle'
+      - else
+        .user-icon
+          = image_tag "default_icon.png", size: "50x50", class: 'rounded-circle'
+
+      .user-name
+        / = link_to post.user.name, user_path(post.user_id), class: 'text-dark'
+        .text-dark= post.user.name
+    .anime-image= image_tag post.image.variant(resize_to_fit: [960, 960]), class: "img-fluid" if post.image.attached?
+    .anime-image= image_tag "no_image.jpg", size: "960",class: 'img-fluid' unless post.image.attached?
+
+    table.table.table-hover
+      tr
+        th= Post.human_attribute_name(:title)
+        td= post.title.blank? ? "未登録" : post.title
+      tr
+        th= Post.human_attribute_name(:episode)
+        td= post.episode.blank? ?  "未登録" : "全#{post.episode}話"
+      tr
+        th= Post.human_attribute_name(:broadcast)
+        td= post.broadcast.blank? ? "未登録" : post.broadcast
+      tr
+        th= Post.human_attribute_name(:staff)
+        td= post.staff.blank? ? "未登録" : post.staff
+      tr
+        th= Post.human_attribute_name(:cast)
+        td= post.cast.blank? ? "未登録" : post.cast
