@@ -12,7 +12,7 @@
         / = link_to post.user.name, user_path(post.user_id), class: 'text-dark'
         .text-dark= post.user.name
     .anime-image= image_tag post.image.variant(resize_to_fit: [960, 960]), class: "img-fluid" if post.image.attached?
-    .anime-image= image_tag "no_image.jpg", size: "960",class: 'img-fluid' unless post.image.attached?
+    .anime-image= image_tag "no_image.jpg", size: "1000x500",class: 'img-fluid' unless post.image.attached?
 
     table.table.table-hover
       tr
