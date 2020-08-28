@@ -32,7 +32,7 @@
 }
 
 // ページネーション
-.pagination{
+.pagenation{
   li{
     a {
       border: none;
@@ -48,6 +48,10 @@
       border-radius: 15px;
     }
   }
+}
+
+.pagination {
+  justify-content: center;
 }
 
 

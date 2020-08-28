@@ -11,6 +11,10 @@
 
     = c.content 
 
+    - if current_user == c.user 
+      .text-right
+        = link_to "削除", post_comments_path(@post, c), method: :delete, data: { confirm: "コメントを削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
+
 
 
 - if current_user.present?
