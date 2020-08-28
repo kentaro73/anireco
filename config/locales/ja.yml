@@ -32,6 +32,8 @@ ja:
       user:
         name: 名前
         avatar: アイコン
+      comment:
+        content: コメント
 
   date:
     abbr_day_names:

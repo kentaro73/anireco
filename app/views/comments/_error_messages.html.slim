@@ -1,0 +1,4 @@
+- if @comment.errors.present?
+ul#error-explanation.text-danger
+  - @comment.errors.full_messages.each do |msg|
+    li = msg

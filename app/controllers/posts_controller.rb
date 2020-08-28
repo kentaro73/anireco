@@ -54,10 +54,6 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def authenticate_user!
-      redirect_to user_session_path, notice: "ログインしてください" unless current_user
-    end
-
     def correct_user
       @post = Post.find_by(id: params[:id])
       redirect_to root_path, notice: "権限がありません" unless @post.user_id == current_user.id || current_user.admin?

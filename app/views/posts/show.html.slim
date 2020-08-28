@@ -39,28 +39,8 @@
       = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
       = link_to '削除', @post, method: :delete, data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
 
-  h2 コメント一覧
-
-  - @post.comments.each do |c|
-    .comments.p-2.flex-row
-      - if c.user.avatar.attached?
-        = image_tag c.user.avatar, size: '50x50', class: 'rounded-circle mr-3'
-      - else
-        = image_tag "default_icon.png", :size => '50x50', class: 'rounded-circle mr-3'
-      = c.content
-      .small= link_to c.user.name, user_path(c.user_id)
-
-
+  h2 #{@post.comments.count}件のコメント
   
+  = render "comments/error_messages"
 
-  - if current_user.present?
-    = form_with model: [@post, @comment], local: true do |f|
-      = f.label :content, class: 'd-none'
-      = f.text_field :content
-      = f.submit 'コメントする', class: 'btn btn-primary ml-3'
-  - else
-    .m-3
-      .text-center
-        p.text-center ログインするとコメントできるようになるよ！
-        .m-3
-          = link_to 'ログイン', new_user_session_path, class: 'btn btn-primary'
+  = render "posts/comment"

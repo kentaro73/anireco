@@ -1,0 +1,28 @@
+- @post.comments.each do |c|
+  .comments.p-2
+    - if c.user.avatar.attached?
+      = image_tag c.user.avatar, size: '50x50', class: 'rounded-circle mr-3'
+      small.text-secondary= "#{time_ago_in_words(c.created_at)}前" if c.created_at
+    - else
+      = image_tag "default_icon.png", :size => '50x50', class: 'rounded-circle mr-3'
+      small.text-secondary= "#{time_ago_in_words(c.created_at)}前" if c.created_at
+
+    .small= link_to c.user.name, user_path(c.user_id)
+
+    = c.content 
+
+
+
+- if current_user.present?
+  = form_with model: [@post, @comment], local: true do |f|
+    = f.label :content, class: 'd-none'
+    = f.text_area :content, class: "form-control"
+    .text-right
+      = f.submit 'コメントする', class: 'btn btn-primary mt-2'
+- else
+  .m-3
+    .text-center
+      p.text-center ログインするとコメントできるようになるよ！
+      .m-3
+        = link_to 'ログイン', new_user_session_path, class: 'btn btn-primary'
+

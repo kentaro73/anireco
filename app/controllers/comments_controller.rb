@@ -8,6 +8,8 @@ class CommentsController < ApplicationController
 
     if @comment.save
       redirect_to @post
+    else
+      render "posts/show"
     end
   end
 
