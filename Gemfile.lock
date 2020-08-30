@@ -118,8 +118,6 @@ GEM
     faker (2.13.0)
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
-    font-awesome-sass (5.4.1)
-      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hpricot (0.8.6)
@@ -326,7 +324,6 @@ DEPENDENCIES
   devise-i18n
   factory_bot_rails
   faker
-  font-awesome-sass
   html2slim
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
