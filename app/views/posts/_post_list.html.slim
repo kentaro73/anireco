@@ -17,15 +17,25 @@
       tr
         th= Post.human_attribute_name(:title)
         td= post.title.blank? ? "未登録" : post.title
+        td
       tr
         th= Post.human_attribute_name(:episode)
         td= post.episode.blank? ?  "未登録" : "全#{post.episode}話"
+        td
       tr
         th= Post.human_attribute_name(:broadcast)
         td= post.broadcast.blank? ? "未登録" : post.broadcast
+        td
       tr
         th= Post.human_attribute_name(:staff)
         td= post.staff.blank? ? "未登録" : post.staff
+        td
+          .comment-icon-color
+            span 
+              i class="fas fa-comment"
+            span.ml-2.text-secondary
+              = post.comments.count
       tr
         th= Post.human_attribute_name(:cast)
         td= post.cast.blank? ? "未登録" : post.cast
+        td= render 'likes/like', post: post

@@ -1,0 +1,15 @@
+- if user_signed_in?
+  - if post.liked_by?(current_user)
+    / span= link_to post.likes.count, post_likes_path(post.id), method: :delete
+    span.fa-yellow
+      i class="fas fa-star"
+    span.text-secondary.ml-2= post.likes.count
+  - else
+    span.fa-yellow= link_to post_likes_path(post.id), method: :post
+      i class="far fa-star"
+    span.text-secondary.ml-2
+      = post.likes.count
+- else
+  span.fa-yellow
+    i class="far fa-star"
+  span.text-secondary.ml-2= post.likes.count

@@ -8,7 +8,9 @@
   border: 2px solid paleturquoise;
   width: 80%;
   margin-left: 8%;
-  text-decoration: none;
+  a {
+    text-decoration: none;
+  }
   .user {
     display: flex;
   }
@@ -54,4 +56,15 @@
   justify-content: center;
 }
 
+// アイコン
 
+.fa-yellow {
+  color: #ffa500;
+  a {
+    color: #ffa500;
+  }
+}
+
+.comment-icon-color {
+  color: gray;
+}

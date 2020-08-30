@@ -10,6 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
+
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
@@ -26,7 +27,6 @@ gem 'html2slim'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'faker'
-gem 'font-awesome-rails'
 gem 'webdrivers'
 gem 'devise'
 gem 'devise-i18n'
