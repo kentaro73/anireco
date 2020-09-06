@@ -14,6 +14,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :favorite_anime %>
+    <%= f.text_field :favorite_anime, autofocus: true, autocomplete: 'favorite_anime', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
   </div>
