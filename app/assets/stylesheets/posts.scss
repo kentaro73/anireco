@@ -2,6 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+// 投稿ボタン
+.post-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  padding: 10px 0 10px 0;
+
+
+}
+.post-btn a {
+  display: block;
+
+  text-decoration: none;
+}
+.post-btn a:hover {
+  opacity: 0.8;
+}
+
+// 投稿ボタンtest
+.footer_fix_btn {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding:5px 0 5px 0;
+  text-align:center;
+  background:#f8f8f8; // 背景色
+  font-size:16px; // テキストの大きさ
+  color:#000000; // 文字色
+  border-top:2px solid #ffffff; // ボタン上部の縁取りの色
+}
+.footer_fix_btn a {
+  display:block;
+  width:100%;
+  text-decoration:none;
+}
+.footer_fix_btn a:hover {
+  opacity:0.8;
+}
+
+
 // 投稿スタイル
 .post-frame { 
   box-shadow: 0px 0px 5px;
@@ -67,4 +108,18 @@
 
 .comment-icon-color {
   color: gray;
+}
+
+// 検索フォーム
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+
+.search-title {
+  padding-right: 3px;
+}
+
+.search-cast {
+  padding-right: 3px;
 }

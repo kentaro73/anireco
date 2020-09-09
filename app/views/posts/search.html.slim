@@ -1,0 +1,8 @@
+h1 検索
+
+= form_with url: sposts_path, method: :get, local: true do |f|
+  = f.text_field :search
+  = f.submit :search
+
+
+

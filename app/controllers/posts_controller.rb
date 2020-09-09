@@ -4,7 +4,10 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    # @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    @search_params = post_search_params
+    @posts = Post.search(@search_params).page(params[:page]).per(10)
+
   end
 
   def show
@@ -58,5 +61,9 @@ class PostsController < ApplicationController
     def correct_user
       @post = Post.find_by(id: params[:id])
       redirect_to root_path, notice: "権限がありません" unless @post.user_id == current_user.id || current_user.admin?
+    end
+
+    def post_search_params
+      params.fetch(:search, {}).permit(:title, :cast, :episode)
     end
 end

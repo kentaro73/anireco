@@ -1,0 +1,17 @@
+= form_with scope: :search, url: posts_path, method: :get, local: true do |f|
+  .search-form
+    .search-title
+      = f.label :title, class: "d-none"
+      = f.text_field :title, value: @search_params[:title], placeholder: "タイトルで検索"
+      = button_tag type: "submit" do
+        i class="fas fa-search"
+    .search-cast
+      = f.label :cast, class: "d-none"
+      = f.text_field :cast, value: @search_params[:cast], placeholder: "声優で検索"
+      = button_tag type: "submit" do
+        i class="fas fa-search"
+    .search-episode
+      = f.label :episode, class: "d-none"
+      = f.number_field :episode, value: @search_params[:episode], placeholder: "話数で検索"
+      = button_tag type: "submit" do
+        i class="fas fa-search"
