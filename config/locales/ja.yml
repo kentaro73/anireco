@@ -21,6 +21,7 @@ ja:
       post:
         id: ID
         title: タイトル
+        tag_name: タグ
         staff: 制作
         favorite_scene: 好きなシーン
         created_at: 登録日時

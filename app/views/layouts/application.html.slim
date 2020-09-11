@@ -18,7 +18,7 @@ html
             li.nav-item= link_to 'ログアウト', destroy_user_session_path, method: :delete,  class: 'nav-link'
           - else 
             li.nav-item= link_to 'ログイン', new_user_session_path, class: 'nav-link'
-      .container
+      .m-2
         - if flash.notice.present?
           .alert.alert-success = flash.notice
         - if flash.alert.present?

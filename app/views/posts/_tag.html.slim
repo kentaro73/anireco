@@ -1,0 +1,5 @@
+h4 タグリスト
+- @tag_list.each do |list|
+  span 
+    = link_to list.tag_name, tag_posts_path(tag_id: list.id)
+    = "(#{list.posts.count})"

@@ -1,8 +1,21 @@
-h1 検索
+h2 タグ検索結果
 
-= form_with url: sposts_path, method: :get, local: true do |f|
-  = f.text_field :search
-  = f.submit :search
+.nav.justify-content-end
+  = link_to '一覧', posts_path, class: 'nav-link'
 
 
+br
+
+= "タグが - "
+strong= "#{@tag.tag_name}"
+= " - の投稿一覧"
+
+br
+.post-n-tag
+  .post_lists
+    = render partial: "post_list", locals: { post: @post}
+  .tag_side
+    = render partial: "tag", locals: { tag_list: @tag_list } 
+.tag_footer
+  = render partial: "tag", locals: { tag_list: @tag_list } 
 

@@ -3,52 +3,54 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
-// 投稿ボタン
-.post-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 25px;
-  padding: 10px 0 10px 0;
-
-
-}
-.post-btn a {
-  display: block;
-
-  text-decoration: none;
-}
-.post-btn a:hover {
-  opacity: 0.8;
+// 検索フォーム
+.search {
+  margin: 10px 10px;
 }
 
-// 投稿ボタンtest
-.footer_fix_btn {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  padding:5px 0 5px 0;
-  text-align:center;
-  background:#f8f8f8; // 背景色
-  font-size:16px; // テキストの大きさ
-  color:#000000; // 文字色
-  border-top:2px solid #ffffff; // ボタン上部の縁取りの色
+.search-form {
+  display: flex;
+  justify-content: center;
 }
-.footer_fix_btn a {
-  display:block;
-  width:100%;
-  text-decoration:none;
+
+.search-title {
+  padding-right: 3px;
 }
-.footer_fix_btn a:hover {
-  opacity:0.8;
+
+.search-cast {
+  padding-right: 3px;
+}
+
+
+// 投稿、タグリスト
+.post-n-tag {
+  display: flex;
+}
+
+// タグリスト
+@media (orientation: portrait) {
+  .tag_side {
+    display: none;
+  }
+}
+
+.tag_side {
+  width: 30%;
+  height: 30%;
+}
+
+.tag_footer {
+  margin: 5% 10%;
 }
 
 
 // 投稿スタイル
+
 .post-frame { 
   box-shadow: 0px 0px 5px;
   border: 2px solid paleturquoise;
   width: 80%;
-  margin-left: 8%;
+  margin-left: 10%;
   a {
     text-decoration: none;
   }
@@ -61,6 +63,15 @@
   .user-icon {
     border-radius: 50%;
   }
+}
+@media (orientation: landscape) {
+  .post-frame {
+    width: 80%;
+  }
+  .tag_footer {
+    display: none;
+  }
+
 }
 
 .field_with_errors { 
@@ -110,16 +121,21 @@
   color: gray;
 }
 
-// 検索フォーム
-.search-form {
-  display: flex;
-  justify-content: center;
-}
 
-.search-title {
-  padding-right: 3px;
-}
 
-.search-cast {
-  padding-right: 3px;
+
+// 投稿ボタン
+.post-btn {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  padding: 10px 0 10px 0;
+}
+.post-btn a {
+  display: block;
+
+  text-decoration: none;
+}
+.post-btn a:hover {
+  opacity: 0.8;
 }

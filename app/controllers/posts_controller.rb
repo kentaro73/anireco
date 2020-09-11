@@ -4,9 +4,17 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    # @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
-    @search_params = post_search_params
-    @posts = Post.search(@search_params).page(params[:page]).per(10)
+    if params[:tag_id]
+      @tag_list = Tag.all
+      @tag = Tag.find(params[:tag_id])
+      @search_params = post_search_params
+      @posts = Post.search(@search_params).page(params[:page]).per(10)
+    else
+      @tag_list = Tag.all
+      @search_params = post_search_params
+      @posts = Post.search(@search_params).page(params[:page]).per(10)
+    end
+
 
   end
 
@@ -15,6 +23,7 @@ class PostsController < ApplicationController
     @comments = @post.comments.all
     @comment = Comment.new
     @likes_count = Like.where(post_id: @post).count
+    @post_tags = @post.tags
   end
 
 
@@ -24,7 +33,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    tag_list = params[:post][:tag_name].split(",")
     if @post.save
+      @post.save_posts(tag_list)
       redirect_to posts_path, notice: "#{@post.title}を投稿しました"
     else 
       render :new
@@ -46,6 +57,12 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to posts_path, notice: "#{@post.title}を削除しました"
+  end
+
+  def search
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts.all
   end
 
   private

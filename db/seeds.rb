@@ -18,8 +18,9 @@
     password_confirmation: password)
   end
   
-  User.create!(name: "一般ユーザー",
+  User.create!(name: "佐藤健",
     email: "general@example.com",
+    favorite_anime: "コードギアス",
     password: "foobaz",
     password_confirmation: "foobaz")
     
@@ -29,14 +30,6 @@
   password: "pmhkiy",
   password_confirmation: "pmhkiy"
   )
-    # Post.create!(title: "名探偵コナン",
-    #              broadcast: "2020年春",
-#              cast: "林原めぐみ",
-#              staff: "京都アニメーション",
-#              favorite_scene: "そのライフルは飾りですか",
-#              media: "TV",
-#              episode: "900",
-#              watched_at: "2020/6/6")
 
 users = User.order(:created_at).take(6)
 10.times do 
@@ -66,3 +59,17 @@ users.each {|user| user.posts.create!(title: title,
 
 end
 
+Tag.create([  
+    { tag_name: "SF"},
+    { tag_name: "ファンタジー"},
+    { tag_name: "ロボット"},
+    { tag_name: "バトル"},
+    { tag_name: "ギャグ"},
+    { tag_name: "ラブコメ"},
+    { tag_name: "日常"},
+    { tag_name: "スポーツ"},
+    { tag_name: "推理"},
+    { tag_name: "戦記"},
+    { tag_name: "ミリタリー"},
+    { tag_name: "青春"}
+])
