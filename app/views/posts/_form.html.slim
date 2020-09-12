@@ -3,15 +3,12 @@
     - post.errors.full_messages.each do |msg|
       li = msg
 
-
-
 = form_with model: @post, local: true do |f|
   .form-group
     = f.label :title
     = f.text_field :title, placeholder: "タイトルは必須です", class: 'form-control'
   .form-group
     = f.label :tag_name
-    span.text-secondary （スペースで区切ることで複数のタグを付けられます）
     = f.text_field :tag_name, placeholder: "例) SF バトル 頭脳戦", class: 'form-control'
   .form-group
     = f.label :image
@@ -31,4 +28,5 @@
   .form-group
     = f.label :favorite_scene
     = f.text_field :favorite_scene, class: 'form-control'
-  = f.submit nil, class: 'btn btn-primary'
+  .text-right
+    = f.submit nil, class: 'btn btn-primary'

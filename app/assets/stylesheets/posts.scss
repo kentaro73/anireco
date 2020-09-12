@@ -2,29 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
+// 投稿一覧ページ
 // 検索フォーム
 .search {
   margin: 10px 10px;
 }
-
 .search-form {
   display: flex;
   justify-content: center;
 }
-
 .search-title {
-  padding-right: 3px;
+  padding-right: 2px;
 }
-
 .search-cast {
-  padding-right: 3px;
+  padding-right: 2px;
 }
-
-
 // 投稿、タグリスト
-.post-n-tag {
-  display: flex;
+.post-index {
+  .post-n-tag {
+    display: flex;
+    margin-top: 20px;
+  }
+  .post_lists {
+    margin-left: 2%;
+    flex: 5;
+  }
+  .tag_side {
+    margin-right: 100px;
+    flex: 1;
+  }
 }
 
 // タグリスト
@@ -33,24 +39,16 @@
     display: none;
   }
 }
-
-.tag_side {
-  width: 40%;
-  height: 30%;
-}
-
-.tag_footer {
+.tag_bottom {
   margin: 5% 10%;
 }
-
-
 // 投稿スタイル
-
 .post-frame { 
   box-shadow: 0px 0px 5px;
   border: 2px solid paleturquoise;
   width: 80%;
-  margin-left: 10%;
+  margin: 20px 0 20px 10%;
+  padding: 10px;
   a {
     text-decoration: none;
   }
@@ -65,26 +63,24 @@
   }
 }
 @media (orientation: landscape) {
-  .post-frame {
-    width: 80%;
+  .post-index {
+    .post-frame {
+      width: 40%;
+      margin: 0 10px 20px 10px;
+    }
+    .tag_bottom {
+      display: none;
+    }
+    .post_lists {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 50px;
+    }
   }
-  .tag_footer {
-    display: none;
-  }
-
 }
-
 .field_with_errors { 
   display: contents;
 }
-
-// アニメ画像
-.anime-image { 
-  object-fit: cover;
-  box-sizing: border-box;
-  width: 100%;
-}
-
 // ページネーション
 .pagenation{
   li{
@@ -103,27 +99,19 @@
     }
   }
 }
-
 .pagination {
   justify-content: center;
 }
-
 // アイコン
-
 .fa-yellow {
   color: #ffa500;
   a {
     color: #ffa500;
   }
 }
-
 .comment-icon-color {
   color: gray;
 }
-
-
-
-
 // 投稿ボタン
 .post-btn {
   position: fixed;
@@ -132,10 +120,13 @@
   padding: 10px 0 10px 0;
 }
 .post-btn a {
-  display: block;
-
+  display: block; 
   text-decoration: none;
 }
 .post-btn a:hover {
   opacity: 0.8;
+}
+// 投稿詳細ページ
+.post-show {
+  width: 100%;
 }
