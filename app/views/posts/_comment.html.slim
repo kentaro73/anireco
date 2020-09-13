@@ -1,22 +1,3 @@
-- @post.comments.each do |c|
-  .comments.p-2
-    - if c.user.avatar.attached?
-      = image_tag c.user.avatar, size: '50x50', class: 'rounded-circle mr-3'
-      small.text-secondary= "#{time_ago_in_words(c.created_at)}前" if c.created_at
-    - else
-      = image_tag "default_icon.png", :size => '50x50', class: 'rounded-circle mr-3'
-      small.text-secondary= "#{time_ago_in_words(c.created_at)}前" if c.created_at
-
-    .small= link_to c.user.name, user_path(c.user_id)
-
-    = c.content 
-
-    - if current_user == c.user 
-      .text-right
-        = link_to "削除", post_comments_path(@post, c), method: :delete, data: { confirm: "コメントを削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
-
-
-
 - if current_user.present?
   = form_with model: [@post, @comment], local: true do |f|
     = f.label :content, class: 'd-none'
@@ -29,4 +10,27 @@
       p.text-center ログインするとコメントできるようになります！
       .m-3
         = link_to 'ログイン', new_user_session_path, class: 'btn btn-primary'
+
+
+
+- @post.comments.each do |c|
+  .comments.p-2
+    .user-info
+      .user-icon
+        - if c.user.avatar.attached?
+          = image_tag c.user.avatar, size: '50x50', class: 'rounded-circle mr-3'
+        - else
+          = image_tag "default_icon.png", :size => '50x50', class: 'rounded-circle mr-3'
+      .comment
+        .user-name-created_at
+          small= link_to c.user.name, user_path(c.user_id)
+          small.text-secondary.pl-3= "#{time_ago_in_words(c.created_at)}前" if c.created_at
+        .comment-content
+          = c.content 
+
+
+
+    - if current_user == c.user 
+      .text-right
+        = link_to "削除", post_comments_path(@post, c), method: :delete, data: { confirm: "コメントを削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
 

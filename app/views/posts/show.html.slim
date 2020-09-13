@@ -4,56 +4,54 @@
     = link_to "一覧", posts_path, class: 'nav-link'
 
   .post-show
-    .post-frame.p-1.my-2
-      .user
-        - if @post.user.avatar.attached?
-          .user-icon= image_tag @post.user.avatar, size: "50x50", class: 'rounded-circle'
-        - else
-          .user_icon= image_tag "default_icon.png", size: "50x50", class: "rounded-circle"
-        .user-name= link_to @post.user.name, user_path(@post.user_id)
-
-      .anime-image= image_tag @post.image.variant(resize_to_fill: [800, 400]), class: "img-fluid" if @post.image.attached?
-
-      table.table.table-hover
-        tr
-          th= Post.human_attribute_name(:title)
-          td= @post.title.blank? ? "未登録" : @post.title
-          td
-        tr
-          th= Post.human_attribute_name(:episode)
-          td= @post.episode.blank? ?  "未登録" : "全#{@post.episode}話"
-          td
-        tr
-          th= Post.human_attribute_name(:broadcast)
-          td= @post.broadcast.blank? ? "未登録" : @post.broadcast
-          td
-        tr
-          th= Post.human_attribute_name(:staff)
-          td= @post.staff.blank? ? "未登録" : @post.staff
-          td
-        tr
-          th= Post.human_attribute_name(:cast)
-          td= @post.cast.blank? ? "未登録" : @post.cast
-          td
-            .comment-icon-color
-              span 
-                i class="fas fa-comment"
-              span.ml-2
-                = @post.comments.count
-            
-
-        tr
-          th= Post.human_attribute_name(:favorite_scene)
-          td= @post.favorite_scene.blank? ? "未登録" : @post.favorite_scene
-          td= render "likes/like", post: @post
+    .user
+      .user-icon= link_to user_path(@post.user_id)
+        = image_tag @post.user.avatar, size: "50x50", class: 'rounded-circle'
+      .user-name.pl-2= link_to @post.user.name, user_path(@post.user_id)
+    .post-n-description
+      .post-frame
+        .anime-image-outer
+          .inner-image
+            = image_tag @post.image.variant(resize_to_fit: [750, 750]), class: "img-fluid  " if @post.image.attached?
+      .description
+        table.table.table-hover
+          tr
+            th= Post.human_attribute_name(:title)
+            td= @post.title.blank? ? "未登録" : @post.title
+            td
+          tr
+            th= Post.human_attribute_name(:episode)
+            td= @post.episode.blank? ?  "未登録" : "全#{@post.episode}話"
+            td
+          tr
+            th= Post.human_attribute_name(:broadcast)
+            td= @post.broadcast.blank? ? "未登録" : @post.broadcast
+            td
+          tr
+            th= Post.human_attribute_name(:staff)
+            td= @post.staff.blank? ? "未登録" : @post.staff
+            td
+          tr
+            th= Post.human_attribute_name(:cast)
+            td= @post.cast.blank? ? "未登録" : @post.cast
+            td
+              .comment-icon-color
+                span 
+                  i class="fas fa-comment"
+                span.ml-2
+                  = @post.comments.count
+          tr
+            th= Post.human_attribute_name(:favorite_scene)
+            td= @post.favorite_scene.blank? ? "未登録" : @post.favorite_scene
+            td= render "likes/like", post: @post
 
     - if current_user && @post.user_id == current_user.id 
       .text-right
         = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
         = link_to '削除', @post, method: :delete, data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
+    .comment
+      h2 #{@post.comments.count}件のコメント
+      
+      = render "comments/error_messages"
 
-    h2 #{@post.comments.count}件のコメント
-    
-    = render "comments/error_messages"
-
-    = render "posts/comment"
+      = render "posts/comment"

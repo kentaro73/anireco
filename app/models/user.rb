@@ -13,4 +13,12 @@ class User < ApplicationRecord
   def set_favorite_anime
     self.favorite_anime = "未登録" if favorite_anime.blank?
   end
+
+  before_create :default_avatar
+  def default_avatar
+    unless self.avatar.attached?
+      self.avatar.attach(io: File.open(Rails.root.join("app", "assets", "images", "default_icon.png")), filename: "default_icon.png", content_type: "image/png")
+    end
+  end
+
 end
