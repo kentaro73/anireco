@@ -12,7 +12,7 @@
       .post-frame
         .anime-image-outer
           .inner-image
-            = image_tag @post.image.variant(resize_to_fit: [750, 750]), class: "img-fluid  " if @post.image.attached?
+            = image_tag @post.image.variant(resize_to_fit: [500, 500]), class: "img-fluid  " if @post.image.attached?
       .description
         table.table.table-hover
           tr

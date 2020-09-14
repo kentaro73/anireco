@@ -5,12 +5,14 @@
         = image_tag post.user.avatar, size: "50x50", class: 'rounded-circle'
       .user-name.pl-2
         .text-dark= link_to post.user.name, user_path(post.user_id)
-        .anime-title.border.border-primary.border-right-0.border-left-0.mt-2.pt-2
-          h5= link_to post.title, post 
         
     .anime-image-outer
       .inner-image= link_to post
-        = image_tag post.image.variant(resize_to_fit: [750, 750]), class: "img-fluid" if post.image.attached?
+        = image_tag post.image.variant(resize_to_fit: [900, 900]), class: "img-fluid" if post.image.attached?
+        .anime-title.mask
+          .caption
+            = post.title
+      
     / .description
     /   table.table.table-hover
     /     tr

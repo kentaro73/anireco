@@ -32,6 +32,8 @@
     -webkit-box-flex: 5;
     -ms-flex: 5;
     flex: 5;
+    display: flex;
+    flex-wrap: wrap;
   }
   .tag_side {
     margin-right: 100px;
@@ -55,8 +57,9 @@
   .post-frame { 
     box-shadow: 0px 0px 2px;
     border: 1px solid skyblue;
-    width: 80%;
-    margin: 20px 0 20px 10%;
+    width: 30%;
+    box-sizing: border-box;
+    margin: 10px 10px ;
     padding: 10px;
     a {
       text-decoration: none;
@@ -67,49 +70,44 @@
       display: -ms-flexbox;    
     }
     .user-name {
-      // padding: 5px 5px 0 5px;
+      // overflow: scroll;
     }
     .user-icon {
       border-radius: 50%;
     }
-    .anime-title {
-      a:hover {
-        text-decoration: none;
+    .inner-image {
+      position: relative;
+      .caption {
+        font-size: 130%;
+        text-align: center;
+        color: #fff;
       }
+      .mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        background-color: rgba(0,0,0,0.4);
+        -webkit-transition: all 0.6s ease;
+        transition: all 0.6s ease;
+      }
+    }
+    .inner-image:hover .mask {
+      opacity: 1;
+      padding-top: 50px;
     }
   }
   
 }
 
-@media (orientation: landscape) {
-  .post-index {
-    .post-frame {
-      width: 40%;
-      margin: 0 10px 20px 10px;
-    }
-    .tag_bottom {
-      display: none;
-    }
-    .post_lists {
-      display: flex;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      -ms-flex-wrap: wrap;    
-      flex-wrap: wrap;
-      margin-left: 50px;
-    }
-  }
-}
 .field_with_errors { 
   display: contents;
 }
 
 // アニメ画像
-.inner-image {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-
+.anime-image-outer {
 }
 // ページネーション
 .pagenation{
@@ -158,9 +156,9 @@
 }
 // 投稿詳細ページ
 .post-show {
-  width: 100%;
   .post-frame {
-    width: 40%;
+    width: calc(100%/3);
+    height: 80%;
     box-shadow: 0px 0px 2px;
     border: 1px solid skyblue;
     margin: 0 0 20px 10%;
