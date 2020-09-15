@@ -1,0 +1,7 @@
+h1 ユーザー一覧 （管理者用）
+
+- @users.each do |user|
+  p
+    = user.name
+    = link_to "削除", user, method: :delete, data: { confirm: "#{user.name}を削除します。よろしいですか？" }, class: "btn btn-outline-danger ml-3"
+

@@ -21,11 +21,15 @@
 
   <div class="form-group">
     <%= f.label :email %>
+      <span class="text-danger">
+        （必須）
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= f.label :password %>
+      <span class="text-danger">
+        （必須）
     <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
 
     <% if @minimum_password_length %>
@@ -35,6 +39,8 @@
 
   <div class="form-group">
     <%= f.label :password_confirmation %>
+      <span class="text-danger">
+        （必須）
     <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
   </div>
 

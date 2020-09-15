@@ -82,7 +82,10 @@
     display: -ms-flexbox;    
   }
   .user-name {
-    // overflow: scroll;
+    a {
+      color: black;
+      text-decoration: none;
+    }
   }
   .user-icon {
     border-radius: 50%;

@@ -25,6 +25,12 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 body {
   font-size: 20px;
 }
+.navbar-brand {
+  a {
+    color: gray;
+    text-decoration: none;
+  }
+}
 
  .wrap { 
   overflow: hidden;
