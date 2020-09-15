@@ -20,86 +20,96 @@
   padding-right: 2px;
 }
 // 投稿、タグリスト
-.post-index {
-  .post-n-tag {
-    display: flex;
-    display: -webkit-box;
-    display: -ms-flexbox;  
-    margin-top: 20px;
-  }
-  .post_lists {
-    margin-left: 2%;
-    -webkit-box-flex: 5;
-    -ms-flex: 5;
-    flex: 5;
-    display: flex;
-    flex-wrap: wrap;
+.post-n-tag {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;  
+  margin-top: 20px;
+}
+.post_lists {
+  margin-left: 2%;
+  -webkit-box-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tag_side {
+  margin-right: 100px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+// タグ検索結果
+.search-results {
+  .post-frame {
+    width: 100%;
   }
   .tag_side {
-    margin-right: 100px;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+    margin: 10px 0 0 50px;
+  }
+  .tag_bottom {
+    margin-top: 30px;
   }
 }
 
+
 // タグリスト
-@media (orientation: portrait) {
+@media screen and (max-width: 1000px) {
   .tag_side {
     display: none;
   }
 }
-.tag_bottom {
-  margin: 5% 10%;
+@media screen and (min-width: 1000px) {
+  .tag_bottom {
+    display: none;
+  }
 }
 // 投稿スタイル
-.post-index {
-  .post-frame { 
-    box-shadow: 0px 0px 2px;
-    border: 1px solid skyblue;
-    width: 30%;
-    box-sizing: border-box;
-    margin: 10px 10px ;
-    padding: 10px;
-    a {
-      text-decoration: none;
+.post-frame { 
+  box-shadow: 0px 0px 2px;
+  border: 1px solid skyblue;
+  width: 30%;
+  box-sizing: border-box;
+  margin: 10px 10px ;
+  padding: 10px;
+  a {
+    text-decoration: none;
+  }
+  .user {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;    
+  }
+  .user-name {
+    // overflow: scroll;
+  }
+  .user-icon {
+    border-radius: 50%;
+  }
+  .inner-image {
+    position: relative;
+    .caption {
+      font-size: 130%;
+      text-align: center;
+      color: #fff;
     }
-    .user {
-      display: flex;
-      display: -webkit-box;
-      display: -ms-flexbox;    
-    }
-    .user-name {
-      // overflow: scroll;
-    }
-    .user-icon {
-      border-radius: 50%;
-    }
-    .inner-image {
-      position: relative;
-      .caption {
-        font-size: 130%;
-        text-align: center;
-        color: #fff;
-      }
-      .mask {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        background-color: rgba(0,0,0,0.4);
-        -webkit-transition: all 0.6s ease;
-        transition: all 0.6s ease;
-      }
-    }
-    .inner-image:hover .mask {
-      opacity: 1;
-      padding-top: 50px;
+    .mask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      background-color: rgba(0,0,0,0.4);
+      -webkit-transition: all 0.6s ease;
+      transition: all 0.6s ease;
     }
   }
-  
+  .inner-image:hover .mask {
+    opacity: 1;
+    padding-top: 50px;
+  }
 }
 
 .field_with_errors { 

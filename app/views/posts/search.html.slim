@@ -1,21 +1,15 @@
-h2 タグ検索結果
-
-.nav.justify-content-end
-  = link_to '一覧', posts_path, class: 'nav-link'
-
-
-br
-
-= "タグが - "
-strong= "#{@tag.tag_name}"
-= " - の投稿一覧"
-
-br
-.post-n-tag
-  .post_lists
-    = render partial: "post_list", locals: { post: @post}
-  .tag_side
-    = render partial: "tag", locals: { tag_list: @tag_list } 
-.tag_bottom
-  = render partial: "tag", locals: { tag_list: @tag_list } 
+.search-results
+  .container    
+    h2 
+      = "タグが - "
+      strong= "#{@tag.tag_name}"
+      = " - の投稿一覧"
+    .nav.justify-content-end= link_to "一覧", posts_path, class: "nav-link"
+    .post-n-tag
+      .post_lists
+        = render partial: "post_list", locals: { post: @post}
+      .tag_side
+        = render partial: "tag", locals: { tag_list: @tag_list } 
+    .tag_bottom
+      = render partial: "tag", locals: { tag_list: @tag_list } 
 
