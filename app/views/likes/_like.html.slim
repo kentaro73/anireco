@@ -1,12 +1,10 @@
 - if user_signed_in?
-  - if post.liked_by?(current_user)
-    / 変数を定義しているがNoMethodErrorになり解決できないので削除機能なし
-    / span= link_to post.likes.count, post_likes_path(post.id), method: :delete
-    span.fa-yellow
+  - if Like.find_by(user_id: current_user.id, post_id: @post.id)
+    span.fa-yellow= link_to post_likes_path(post.id), method: :delete
       i class="fas fa-star"
     span.text-secondary.ml-2= post.likes.count
   - else
-    span.fa-yellow= link_to post_likes_path(post.id), method: :post, data: { confirm: "お気に入り登録するとお気に入りを削除できません。よろしいですか？" }
+    span.fa-yellow= link_to post_likes_path(post.id), method: :post
       i class="far fa-star"
     span.text-secondary.ml-2
       = post.likes.count

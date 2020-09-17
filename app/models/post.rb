@@ -35,10 +35,6 @@ class Post < ApplicationRecord
   scope :episode_is, -> (episode) { where(episode: episode) if episode.present?}
 
 
-  def liked_by?(user)
-    likes.where(user_id: user.id).exists?
-  end
-
   def save_posts(tags)
     current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
     old_tags = current_tags - tags

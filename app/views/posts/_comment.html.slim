@@ -32,5 +32,5 @@
 
     - if current_user == c.user 
       .text-right
-        = link_to "削除", post_comments_path(@post, c), method: :delete, data: { confirm: "コメントを削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
+        = link_to "削除", post_comment_path(@post, c), method: :delete, data: { confirm: "コメントを削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
 
