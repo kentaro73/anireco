@@ -31,7 +31,8 @@ class Post < ApplicationRecord
       .episode_is(search_params[:episode])
   end
   scope :title_like, -> (title) { where('title LIKE ?', "%#{title}%") if title.present?}
-  scope :cast_like, -> (cast) { where('cast LIKE ?', "%#{cast}") if cast.present?}
+  # castはpostgresqlの予約語のためダブルクオテーションで囲む必要がある
+  scope :cast_like, -> (cast) { where('"cast" LIKE ?', "%#{cast}%") if cast.present?}
   scope :episode_is, -> (episode) { where(episode: episode) if episode.present?}
 
 
