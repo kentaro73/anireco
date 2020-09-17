@@ -27,11 +27,11 @@ class Post < ApplicationRecord
     return if search_params.blank?
     
     title_like(search_params[:title])
-      .cast_is(search_params[:cast])
+      .cast_like(search_params[:cast])
       .episode_is(search_params[:episode])
   end
   scope :title_like, -> (title) { where('title LIKE ?', "%#{title}%") if title.present?}
-  scope :cast_is, -> (cast) { where(cast: cast) if cast.present?}
+  scope :cast_like, -> (cast) { where('cast LIKE ?', "%#{cast}") if cast.present?}
   scope :episode_is, -> (episode) { where(episode: episode) if episode.present?}
 
 
