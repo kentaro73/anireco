@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     get :search, on: :collection
   end
+  get "like_lists", to: "likes#index"
   resources :tags do
     get "posts", to: "posts#search"
   end

@@ -35,15 +35,14 @@
             th= Post.human_attribute_name(:cast)
             td= @post.cast.blank? ? "未登録" : @post.cast
             td
-              .comment-icon-color
-                span 
-                  i class="fas fa-comment"
-                span.ml-2
-                  = @post.comments.count
           tr
             th= Post.human_attribute_name(:favorite_scene)
             td= @post.favorite_scene.blank? ? "未登録" : @post.favorite_scene
+            td
+          tr
+            th お気に入り
             td= render "likes/like", post: @post
+            td
 
     / 投稿した本人と、管理者のみ表示
     - if current_user && @post.user_id == current_user.id || current_user&.admin?

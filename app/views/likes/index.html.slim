@@ -1,0 +1,17 @@
+
+.post-inde
+  
+  .post-n-tag
+    .post_lists
+      = render partial: 'posts/post_list', locals: { post: @posts }
+    .tag_side
+      = render partial: "posts/tag", locals: { tag_list: @tag_list } 
+
+    
+  .pagenation
+    = paginate @posts
+  .post-btn
+    = link_to "登録", new_post_path,  class: "btn btn-primary"
+  
+  .tag_bottom.m-3
+    = render partial: "posts/tag", locals: { tag_list: @tag_list }
