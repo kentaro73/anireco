@@ -4,8 +4,7 @@
   
   .post-n-tag
     .post_lists
-      = render partial: 'post_list'
-      / , locals: { post: @posts }
+      = render partial: 'post_list', locals: { post: @posts }
     .tag_side
       = render partial: "tag", locals: { tag_list: @tag_list } 
 
