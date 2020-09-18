@@ -12,3 +12,12 @@
 .episode-count {
   float: right;
 }
+.user-posts {
+  display: flex;
+  flex-wrap: wrap ;
+  width: 100%;
+  margin: 0 0 0 20px;
+
+  .post-frame {
+  }
+}

@@ -11,15 +11,20 @@
     p= @user.favorite_anime
 .user-posted
   .watched-anime.pt-3
-    p 今まで見たアニメ
+    p 登録したアニメ
   .episode-count
     span 総視聴話数:
     span= "#{@user.posts.all.sum(:episode)}話"
 
 .user-posts
   - @user.posts.each do |post|
-    .anime-title
-      h2= post.title
+    .post-frame
+      .inner-image= link_to post
+        = image_tag post.image.variant(resize_to_fill: [900, 900]), class: "img-fluid" if post.image.attached?
+        .anime-title.mask
+          .caption
+            = post.title
+
 
 
 
