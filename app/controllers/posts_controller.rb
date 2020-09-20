@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    tag_list = params[:post][:tag_name].split(",")
+    tag_list = params[:post][:tag_name].split("/")
     if @post.save
       @post.save_posts(tag_list)
       redirect_to posts_path, notice: "#{@post.title}を投稿しました"
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update!(post_params)
+    if @post.update(post_params)
       redirect_to posts_url, notice: "#{@post.title}を更新しました"
     else
       render :edit
