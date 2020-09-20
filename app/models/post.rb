@@ -11,7 +11,6 @@ class Post < ApplicationRecord
   # タグ機能リレーション
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
-
   # 投稿に画像が添付されていない時の画像
   before_create :default_image
   def default_image
@@ -19,9 +18,6 @@ class Post < ApplicationRecord
       self.image.attach(io: File.open(Rails.root.join("app", "assets", "images", "no_image.jpg")), filename: "no_image.jpg", content_type: "image/jpg")
     end
   end
-
-
-
   # 検索機能
   scope :search, -> (search_params) do
     return if search_params.blank?
