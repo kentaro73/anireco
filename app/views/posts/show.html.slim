@@ -48,11 +48,13 @@
     - if current_user && @post.user_id == current_user.id || current_user&.admin?
       .text-right
         = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
-        = link_to '削除', @post, method: :delete, data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
+        = link_to '削除', @post, method: :delete, id: "delete_post", data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
 
     .comment
       h2 #{@post.comments.count}件のコメント
-      
+
       = render "comments/error_messages"
 
       = render "posts/comment"
+
+      

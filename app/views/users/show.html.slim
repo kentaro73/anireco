@@ -9,6 +9,9 @@
   .favorite_anime.pt-3
     span 好きなアニメ
     p= @user.favorite_anime
+- if current_user&.id == @user.id
+  .edit-and-delete.mt-3.text-right
+    span= link_to "編集", edit_user_registration_path, class: "btn btn-outline-success mr-2"
 .user-posted
   .watched-anime.pt-3
     p 登録したアニメ

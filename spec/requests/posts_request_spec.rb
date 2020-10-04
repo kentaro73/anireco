@@ -253,17 +253,6 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "#create" do
-    context "ログインしているとき" do
-
-      it "投稿できること" do
-        post_params = FactoryBot.attributes_for(:post)
-        sign_in @user
-        expect {
-          post posts_path, params: { post: post_params }
-        }.to change(@user.posts, :count).by(1)
-      end
-    end
-
 
     context "ログインしていないとき" do
       it "ログイン画面にリダイレクトすること" do
@@ -329,7 +318,7 @@ RSpec.describe "Posts", type: :request do
       it "他のユーザーの投稿も更新できること" do
         expect do
           patch post_url @post, params: { post: FactoryBot.attributes_for(:other_post) }
-        end.to change { Post.find(@post.id).title }.from("test title").to("other title")
+        end.to change { Post.find(@post.id).title }.from("鬼滅の刃").to("氷菓")
       end
 
       it "一覧ページにリダイレクトすること" do
@@ -359,7 +348,7 @@ RSpec.describe "Posts", type: :request do
         @post = FactoryBot.create(:post, user_id: @user.id)
         expect do
           patch post_url @post, params: { post: FactoryBot.attributes_for(:other_post) }
-        end.to change { Post.find(@post.id).title }.from("test title").to("other title")
+        end.to change { Post.find(@post.id).title }.from("鬼滅の刃").to("氷菓")
       end
       
       it "他のユーザーの投稿は更新できないこと" do

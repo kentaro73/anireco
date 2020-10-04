@@ -9,6 +9,6 @@
     span.text-secondary.ml-2
       = post.likes.count
 - else
-  span.fa-yellow
+  span.fa-yellow= link_to post_likes_path(post.id), method: :post
     i class="far fa-star"
   span.text-secondary.ml-2= post.likes.count
