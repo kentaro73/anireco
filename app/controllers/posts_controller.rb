@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_params, only: [:show, :edit, :update, :destroy]
+  before_action :find_params, only: [:show, :edit, :update, :destroy, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -14,8 +14,6 @@ class PostsController < ApplicationController
       @search_params = post_search_params
       @posts = Post.search(@search_params).page(params[:page]).per(9)
     end
-
-
   end
 
   def show
@@ -64,6 +62,8 @@ class PostsController < ApplicationController
     @tag = Tag.find(params[:tag_id])
     @posts = @tag.posts.all
   end
+
+
 
   private
 

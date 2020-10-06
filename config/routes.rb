@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :tags do
     get "posts", to: "posts#search"
   end
-  resources :users
+  resources :users 
   delete "/posts/:id/likes", to: "likes#destroy"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
