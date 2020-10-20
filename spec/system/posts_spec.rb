@@ -21,6 +21,11 @@ RSpec.describe "Posts", type: :system do
         expect(page).to have_no_link "お気に入り"
         expect(page).to have_no_link "ユーザー一覧"
       end
+
+      it "ゲストログインできること" do
+        click_link "ゲストログイン（閲覧用）"
+        expect(page).to have_content "ゲストユーザーとしてログインしました"
+      end
     end
 
     context "ログインしているとき" do
