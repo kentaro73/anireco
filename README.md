@@ -1,24 +1,23 @@
-# README
+「アニレコ」は視聴したアニメを共有するSNSです
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+アプリケーション機能一覧
+・投稿機能
+・検索機能
+・タグ機能
+・いいね機能
+・ページネーション機能
+・統合テスト機能
+・単体テスト機能
+・投稿にコメントをつける機能
+・画像ファイルアップロード機能
+・投稿一覧表示機能
+・投稿詳細表示機能
+・認証機能
+・管理ユーザログイン機能
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+技術一覧
+・RSpec
+・Amazon S3
+・Active Storage
+・kaminari
+・devise
