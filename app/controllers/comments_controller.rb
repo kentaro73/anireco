@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    flash[:notice] = "#{@comment.content}を削除しました"
+    flash[:notice] = "#{@comment.content} deleted successfully."
     redirect_back(fallback_location: root_path)
   end
 
@@ -31,6 +31,6 @@ class CommentsController < ApplicationController
     def correct_user
       # @comment = current_user.comments.find_by(id: params[:id])
       @comment = Comment.find(params[:id])
-      redirect_to root_url, notice: "権限がありません" unless @comment.user_id == current_user.id || current_user.admin?
+      redirect_to root_url, notice: "You're not authorized." unless @comment.user_id == current_user.id || current_user.admin?
     end
 end

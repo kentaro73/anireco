@@ -9,7 +9,7 @@
       .comment
         .user-name-created_at
           small= link_to c.user.name, user_path(c.user_id)
-          small.text-secondary.pl-3= "#{time_ago_in_words(c.created_at)}前" if c.created_at
+          small.text-secondary.pl-3= "#{time_ago_in_words(c.created_at)} ago" if c.created_at
         .comment-content
           = c.content 
 
@@ -17,20 +17,20 @@
 
     - if current_user == c.user || current_user&.admin?
       .comment-delete.text-right
-        = link_to "削除", post_comment_path(@post, c), method: :delete, data: { confirm: "#{c.content}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
+        = link_to "Delete", post_comment_path(@post, c), method: :delete, data: { confirm: "#{c.content} will be deleted. Are you sure?" }, class: 'btn btn-outline-danger'
 
 - if current_user.present?
   = form_with model: [@post, @comment], local: true do |f|
     = f.label :content, class: 'd-none'
     = f.text_area :content, class: "form-control"
     .text-right
-      = f.submit 'コメントする', class: 'btn btn-primary mt-2'
+      = f.submit 'Comment', class: 'btn btn-primary mt-2'
 - else
   .m-3
     .text-center
-      p.text-center ログインするとコメントできるようになります！
+      p.text-center You will be able to comment when you log in!
       .m-3
-        = link_to 'ログイン', new_user_session_path, class: 'btn btn-primary'
+        = link_to 'Login', new_user_session_path, class: 'btn btn-primary'
 
 
 

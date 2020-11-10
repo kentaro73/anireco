@@ -16,13 +16,13 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to users_path, notice: "ユーザー「#{@user.name}」を削除しました"
+    redirect_to users_path, notice: "'#{@user.name}' deleted successfully."
   end
 
   private
 
     def require_admin
-      redirect_to root_path, notice: "権限がありません" unless current_user&.admin?
+      redirect_to root_path, notice: "You're not authorized." unless current_user&.admin?
     end
 
 end

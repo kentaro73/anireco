@@ -4,6 +4,8 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
+    redirect_to "/welcomes" unless user_signed_in?
+
     if params[:tag_id]
       @tag_list = Tag.all
       @tag = Tag.find(params[:tag_id])
@@ -34,7 +36,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split("/")
     if @post.save
       @post.save_posts(tag_list)
-      redirect_to posts_path, notice: "#{@post.title}を投稿しました"
+      redirect_to root_path, notice: "#{@post.title} posted successfully."
     else 
       render :new
     end
@@ -46,7 +48,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to posts_url, notice: "#{@post.title}を更新しました"
+      redirect_to root_url, notice: "#{@post.title} updated successfully."
     else
       render :edit
     end
@@ -54,7 +56,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "#{@post.title}を削除しました"
+    redirect_to root_path, notice: "#{@post.title} deleted successfully."
   end
 
   def search
@@ -77,7 +79,7 @@ class PostsController < ApplicationController
 
     def correct_user
       @post = Post.find_by(id: params[:id])
-      redirect_to root_path, notice: "権限がありません" unless @post.user_id == current_user.id || current_user.admin?
+      redirect_to root_path, notice: "You're not authorized." unless @post.user_id == current_user.id || current_user.admin?
     end
 
     def post_search_params

@@ -22,16 +22,30 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
 @import "bootstrap";
 
-body {
-  font-size: 20px;
+* {
+  box-sizing: border-box;
 }
+
+body, html {
+  height: 100%;
+  font-size: 20px;
+  font-family: 'Crimson Text', serif;
+}
+
+
+.flash-message {
+  margin: 80px 10px 0 10px;
+}
+
 .navbar-brand {
   a {
-    color: gray;
+    color: white;
     text-decoration: none;
   }
+
 }
 
  .wrap { 
   overflow: hidden;
+
 }

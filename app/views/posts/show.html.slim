@@ -1,7 +1,7 @@
 .mb-3
 
   .nav.justify-content-end
-    = link_to "一覧", posts_path, class: 'nav-link'
+    = link_to "List", posts_path, class: 'nav-link'
 
   .post-show
     .user
@@ -17,41 +17,41 @@
         table.table.table-hover
           tr
             th= Post.human_attribute_name(:title)
-            td= @post.title.blank? ? "未登録" : @post.title
+            td= @post.title.blank? ? "Unregistered" : @post.title
             td
           tr
             th= Post.human_attribute_name(:episode)
-            td= @post.episode.blank? ?  "未登録" : "全#{@post.episode}話"
+            td= @post.episode.blank? ?  "Unregistered" : "#{@post.episode} episodes"
             td
           tr
             th= Post.human_attribute_name(:broadcast)
-            td= @post.broadcast.blank? ? "未登録" : @post.broadcast
+            td= @post.broadcast.blank? ? "Unregistered" : @post.broadcast
             td
           tr
             th= Post.human_attribute_name(:staff)
-            td= @post.staff.blank? ? "未登録" : @post.staff
+            td= @post.staff.blank? ? "Unregistered" : @post.staff
             td
           tr
             th= Post.human_attribute_name(:cast)
-            td= @post.cast.blank? ? "未登録" : @post.cast
+            td= @post.cast.blank? ? "Unregistered" : @post.cast
             td
           tr
             th= Post.human_attribute_name(:favorite_scene)
-            td= @post.favorite_scene.blank? ? "未登録" : @post.favorite_scene
+            td= @post.favorite_scene.blank? ? "Unregistered" : @post.favorite_scene
             td
           tr
-            th お気に入り
+            th Favorite
             td= render "likes/like", post: @post
             td
 
     / 投稿した本人と、管理者のみ表示
     - if current_user && @post.user_id == current_user.id || current_user&.admin?
       .text-right
-        = link_to '編集', edit_post_path, class: 'btn btn-outline-success'
-        = link_to '削除', @post, method: :delete, id: "delete_post", data: { confirm: "#{@post.title}を削除します。よろしいですか？" }, class: 'btn btn-outline-danger ml-2'
+        = link_to 'Edit', edit_post_path, class: 'btn btn-outline-success'
+        = link_to 'Delete', @post, method: :delete, id: "delete_post", data: { confirm: "#{@post.title} will be deleted. Are you sure?" }, class: 'btn btn-outline-danger ml-2'
 
     .comment
-      h2 #{@post.comments.count}件のコメント
+      h2 #{@post.comments.count} comments
 
       = render "comments/error_messages"
 

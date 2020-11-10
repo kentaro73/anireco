@@ -1,10 +1,10 @@
 .search-results
   .container    
     h2 
-      = "タグが - "
+      = "Posts that tag is - "
       strong= "#{@tag.tag_name}"
-      = " - の投稿一覧"
-    .nav.justify-content-end= link_to "一覧", posts_path, class: "nav-link"
+      = " - "
+    .nav.justify-content-end= link_to "List", posts_path, class: "nav-link"
     .post-n-tag
       .post_lists
         = render partial: "post_list", locals: { post: @post}

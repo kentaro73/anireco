@@ -1,0 +1,44 @@
+// Place all the styles related to the welcome_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+
+.welcome {
+  text-align: center;
+  background-image: image-url("background-image.jpg");
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.top-wrapper {
+  margin-top: 300px;
+}
+
+.top-btn {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.top-btn .btn {
+  cursor: pointer;
+  justify-content: center;
+  margin: 50px 15px 0 0;
+  background-color: blue!important;
+  width: 80%;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.signup:hover {
+  opacity: 0.8;
+}
+
+.login:hover {
+  opacity: 0.8;
+}
+

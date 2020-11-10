@@ -12,11 +12,11 @@ class User < ApplicationRecord
   has_many :like_posts, through: :likes, source: :post
 
   def set_nameless_name
-    self.name = "ゲスト" if name.blank?
+    self.name = "Guest" if name.blank?
   end
 
   def set_favorite_anime
-    self.favorite_anime = "未登録" if favorite_anime.blank?
+    self.favorite_anime = "Unregistered" if favorite_anime.blank?
   end
 
   before_create :default_avatar
