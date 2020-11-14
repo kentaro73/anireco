@@ -21,7 +21,7 @@
 
 - if current_user.present?
   = form_with model: [@post, @comment], local: true do |f|
-    = f.label :content, class: 'd-none'
+    = f.label :content, class: "d-none"
     = f.text_area :content, class: "form-control"
     .text-right
       = f.submit 'Comment', class: 'btn btn-primary mt-2'
