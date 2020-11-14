@@ -9,7 +9,7 @@ RSpec.describe "Users", type: :system do
 
       it "アクセスできないこと" do
         visit users_path
-        expect(page).to have_content "アカウント登録もしくはログインしてください"
+        expect(page).to have_content "You need to sign in or sign up before continuing."
       end
     end
 
@@ -17,14 +17,14 @@ RSpec.describe "Users", type: :system do
       before do
         @user = FactoryBot.create(:user)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"
         visit users_path
       end
 
       it "アクセスできないこと" do
-        expect(page).to have_content "権限がありません"
+        expect(page).to have_content "You're not authorized."
         expect(current_path).to eq root_path
       end
     end
@@ -35,9 +35,9 @@ RSpec.describe "Users", type: :system do
         @user = FactoryBot.create(:user)
         @other_user = FactoryBot.create(:other_user)
         visit new_user_session_path
-        fill_in "Eメール", with: @admin_user.email
-        fill_in "パスワード", with: @admin_user.password
-        click_button "ログイン"
+        fill_in "Email", with: @admin_user.email
+        fill_in "Password", with: @admin_user.password
+        click_button "Log in"
         visit users_path
       end
 
@@ -62,7 +62,7 @@ RSpec.describe "Users", type: :system do
       
       it "総視聴話数が表示されていること" do
         visit user_path(@user)
-        expect(page).to have_content "200話"
+        expect(page).to have_content "200 episodes"
       end
 
       it "好きなアニメが表示されていること" do
@@ -77,20 +77,20 @@ RSpec.describe "Users", type: :system do
         @user = FactoryBot.create(:user)
         @other_user = FactoryBot.create(:other_user)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"
       end
 
       it "自分のページには編集リンクがあり、機能していること" do
         visit user_path(@user)
-        click_link "編集"
+        click_link "Edit"
         expect(current_path).to eq edit_user_registration_path
       end
 
       it "他のユーザーのページには編集リンクがないこと" do
         visit user_path(@other_user)
-        expect(page).to have_no_link "編集"
+        expect(page).to have_no_link "Edit"
       end
     end
 
@@ -102,62 +102,62 @@ RSpec.describe "Users", type: :system do
     end
 
     it "アカウント登録できること" do
-      fill_in "名前", with: "佐藤健"
-      fill_in "好きなアニメ", with: "るろうに剣心"
-      fill_in "Eメール", with: "satoutakeru@example.com"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワード（確認用）", with: "password"
-      click_button "アカウント登録"
+      fill_in "Name", with: "佐藤健"
+      fill_in "Favorite anime", with: "るろうに剣心"
+      fill_in "Email", with: "satoutakeru@example.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
       expect(current_path).to eq root_path
-      expect(page).to have_content "アカウント登録が完了しました"
+      expect(page).to have_content "Welcome! You have signed up successfully."
       expect(page).to have_link "佐藤健"
     end
 
     it "メールアドレスがないと登録できないこと" do
-      fill_in "名前", with: "佐藤健"
-      fill_in "好きなアニメ", with: "るろうに剣心"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワード（確認用）", with: "password"
-      click_button "アカウント登録"
-      expect(page).to have_selector 'li', text: 'Eメールを入力してください'
+      fill_in "Name", with: "佐藤健"
+      fill_in "Favorite anime", with: "るろうに剣心"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
+      expect(page).to have_selector 'li', text: "Email can't be blank"
     end
 
     it "パスワードがないと登録できないこと" do
-      fill_in "名前", with: "佐藤健"
-      fill_in "好きなアニメ", with: "るろうに剣心"
-      fill_in "Eメール", with: "satoutakeru@example.com"
-      click_button "アカウント登録"
-      expect(page).to have_selector "li", text: "パスワードを入力してください"
+      fill_in "Name", with: "佐藤健"
+      fill_in "Favorite anime", with: "るろうに剣心"
+      fill_in "Email", with: "satoutakeru@example.com"
+      click_button "Sign up"
+      expect(page).to have_selector "li", text: "Password can't be blank"
     end
 
     it "名前が未入力だとゲストという名前になること" do
-      fill_in "好きなアニメ", with: "るろうに剣心"
-      fill_in "Eメール", with: "satoutakeru@example.com"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワード（確認用）", with: "password"
-      click_button "アカウント登録"
-      expect(page).to have_link "ゲスト"
+      fill_in "Favorite anime", with: "るろうに剣心"
+      fill_in "Email", with: "satoutakeru@example.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
+      expect(page).to have_link "Guest"
     end
 
     it "アイコンが未入力でも登録できること" do
-      fill_in "名前", with: "佐藤健"
-      fill_in "好きなアニメ", with: "るろうに剣心"
-      fill_in "Eメール", with: "satoutakeru@example.com"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワード（確認用）", with: "password"
-      click_button "アカウント登録"
+      fill_in "Name", with: "佐藤健"
+      fill_in "Favorite anime", with: "るろうに剣心"
+      fill_in "Email", with: "satoutakeru@example.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
       expect(current_path).to eq root_path
-      expect(page).to have_content "アカウント登録が完了しました"
+      expect(page).to have_content "Welcome! You have signed up successfully."
     end
 
     it "好きなアニメが未入力でも登録できること" do
-      fill_in "名前", with: "佐藤健"
-      fill_in "Eメール", with: "satoutakeru@example.com"
-      fill_in "パスワード", with: "password"
-      fill_in "パスワード（確認用）", with: "password"
-      click_button "アカウント登録"
+      fill_in "Name", with: "佐藤健"
+      fill_in "Email", with: "satoutakeru@example.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
       expect(current_path).to eq root_path
-      expect(page).to have_content "アカウント登録が完了しました"
+      expect(page).to have_content "Welcome! You have signed up successfully."
     end
   end
 
@@ -165,9 +165,9 @@ RSpec.describe "Users", type: :system do
     before do
       @user = FactoryBot.create(:user)
       visit new_user_session_path
-      fill_in "Eメール", with: @user.email
-      fill_in "パスワード", with: @user.password
-      click_button "ログイン"
+      fill_in "Email", with: @user.email
+      fill_in "Password", with: @user.password
+      click_button "Log in"
       visit user_path(@user)
     end
   end
@@ -177,9 +177,9 @@ RSpec.describe "Users", type: :system do
       @admin_user = FactoryBot.create(:admin_user)
       @user = FactoryBot.create(:user)
       visit new_user_session_path
-      fill_in "Eメール", with: @admin_user.email
-      fill_in "パスワード", with: @admin_user.password
-      click_button "ログイン"
+      fill_in "Email", with: @admin_user.email
+      fill_in "Password", with: @admin_user.password
+      click_button "Log in"
     end
 
     context "共通ヘッダーに" do
@@ -188,13 +188,9 @@ RSpec.describe "Users", type: :system do
       end
 
       it "ユーザー一覧リンクが表示されていること" do
-        expect(page).to have_link "ユーザー一覧"
+        expect(page).to have_link "Users"
       end
     end
-  end
-
-  describe "ユーザー編集ページ" do
-
   end
 
 end

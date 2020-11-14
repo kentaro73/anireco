@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Search", type: :system do
   describe "投稿一覧ページにある検索フォームで" do            
-    context "ログインしていないとき" do
+    context "ログインしているとき" do
       before do
         @post = FactoryBot.create(:post)
         @other_post = FactoryBot.create(:other_post)
         visit root_path
+        click_link "Skip Signup"
       end
 
       it "タイトルで検索できること" do
