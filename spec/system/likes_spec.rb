@@ -19,9 +19,9 @@ RSpec.describe "Likes", type: :system do
         @post = FactoryBot.create(:post)
         @user = FactoryBot.create(:user)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"
         visit post_path(@post)
       end
 
