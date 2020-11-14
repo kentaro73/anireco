@@ -8,23 +8,23 @@ RSpec.describe "Posts", type: :system do
       end
 
       it "会員登録リンクがあり、機能していること" do
-        click_link "会員登録"
+        click_link "Signup"
         expect(current_path).to eq new_user_registration_path
       end
 
       it "ログインリンクがあり、機能していること" do
-        click_link "ログイン"
+        click_link "Login", match: :first
         expect(current_path).to eq new_user_session_path
       end
 
       it "お気に入り、ユーザー一覧と表示されていないこと" do
-        expect(page).to have_no_link "お気に入り"
-        expect(page).to have_no_link "ユーザー一覧"
+        expect(page).to have_no_link "Favorite"
+        expect(page).to have_no_link "Users"
       end
 
       it "ゲストログインできること" do
-        click_link "ゲストログイン（閲覧用）"
-        expect(page).to have_content "ゲストユーザーとしてログインしました"
+        click_link "Skip Signup"
+        expect(page).to have_content "Logged in as a guest user."
       end
     end
 
@@ -35,9 +35,9 @@ RSpec.describe "Posts", type: :system do
         @post = FactoryBot.create(:post, user_id: @user.id)
         @other_post = FactoryBot.create(:other_post, user_id: @other_user.id)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"  
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"  
       end
 
       it "ログインしているユーザのリンクが機能していること" do
@@ -47,26 +47,14 @@ RSpec.describe "Posts", type: :system do
         expect(current_path).to eq user_path(@user)
       end
 
-      it "アニメ登録リンクがヘッダーにもあること" do
-        within ".navbar-nav" do
-          click_link "アニメ登録" 
-        end
-        expect(current_path).to eq new_post_path
-      end
-
       it "お気に入りリンクが機能していること" do
-        click_link "お気に入り"
+        click_link "Favorite"
         expect(current_path).to eq "/like_lists"
       end
 
-      it "ホームリンクが機能していること" do
-        click_link "ホーム"
-        expect(current_path).to eq root_path
-      end
-
       it "ログアウトリンクが機能していること" do
-        click_link "ログアウト"
-        expect(page).to have_content "ログアウトしました"
+        click_link "Logout"
+        expect(page).to have_content "Signed out successfully."
       end
     end
 
@@ -75,14 +63,14 @@ RSpec.describe "Posts", type: :system do
         @admin_user = FactoryBot.create(:admin_user)
         @user = FactoryBot.create(:user)
         visit new_user_session_path
-        fill_in "Eメール", with: @admin_user.email
-        fill_in "パスワード", with: @admin_user.password
-        click_button "ログイン"
+        fill_in "Email", with: @admin_user.email
+        fill_in "Password", with: @admin_user.password
+        click_button "Log in"
         visit root_path
       end
 
       it "ユーザー一覧リンクが表示され、機能していること" do
-        click_link "ユーザー一覧" 
+        click_link "Users" 
         expect(current_path).to eq users_path
       end
     end
@@ -98,14 +86,10 @@ RSpec.describe "Posts", type: :system do
         visit posts_path
       end
 
-      it "投稿が表示されていること" do
-        expect(find(".caption", visible: false).hover).to have_content "#{@post.title}"
+      it "ウェルカムページに遷移すること" do
+        expect(current_path).to eq "/welcomes"
       end
 
-      it "アニメ登録を押下するとログインを促すこと" do
-        click_link "アニメ登録"
-        expect(page).to have_content "アカウント登録もしくはログインしてください"
-      end
     end
 
     context "ログインしているとき" do
@@ -115,9 +99,9 @@ RSpec.describe "Posts", type: :system do
         @post = FactoryBot.create(:post, user_id: @user.id)
         @other_post = FactoryBot.create(:other_post, user_id: @other_user.id)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"
       end
   
       it "投稿したユーザーのリンクが機能していること" do
@@ -140,10 +124,9 @@ RSpec.describe "Posts", type: :system do
       end
 
       it "ログイン導線があること" do
-        expect(page).to have_content "ログインするとコメントできるようになります！"
-        expect(page).to have_link "ログイン"
+        expect(page).to have_content "You will be able to comment when you log in!"
+        expect(page).to have_link "Login"
       end
-
       it "登録された内容が表示されていること" do
         expect(body).to include("#{@post.title}")           # アニメタイトル
         expect(body).to include("#{@post.episode}")         # 話数
@@ -161,32 +144,33 @@ RSpec.describe "Posts", type: :system do
         @post = FactoryBot.create(:post, user_id: @user.id)
         @other_post = FactoryBot.create(:other_post)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"
       end
 
       it "他のユーザーの投稿には編集、削除リンクがないこと" do
         visit post_path(@other_post)
-        expect(page).to have_no_link "編集"
-        expect(page).to have_no_link "削除"
+        expect(page).to have_no_link "Edit"
+        expect(page).to have_no_link "Delete"
       end
 
       it "自分の投稿には編集リンクがあり、機能していること" do
         visit post_path(@post)
-        click_link "編集"
+        click_link "Edit"
         expect(current_path).to eq edit_post_path(@post)
       end
 
       it "自分の投稿には削除リンクがあり、機能していること" do
         visit post_path(@post)
-        click_link "削除"
+        click_link "Delete"
         expect{
-          expect(page.accept_confirm).to eq "#{@post.title}を削除します。よろしいですか？"
-          expect(page).to have_content "#{@post.title}を削除しました"
+          expect(page.accept_confirm).to eq "#{@post.title} will be deleted. Are you sure?"
+          expect(page).to have_content "#{@post.title} deleted successfully."
           }.to change(@user.posts, :count).by(-1)
       end
     end
+    
 
     context "管理ユーザとしてログインしているとき" do
       before do
@@ -194,23 +178,23 @@ RSpec.describe "Posts", type: :system do
         @user = FactoryBot.create(:user)
         @post = FactoryBot.create(:post, user_id: @user.id)
         visit new_user_session_path
-        fill_in "Eメール", with: @admin_user.email
-        fill_in "パスワード", with: @admin_user.password
-        click_button "ログイン"
+        fill_in "Email", with: @admin_user.email
+        fill_in "Password", with: @admin_user.password
+        click_button "Log in"
       end
 
       it "他のユーザの投稿にも編集リンクがあり、機能していること" do
         visit post_path(@post)
-        click_link "編集"
+        click_link "Edit"
         expect(current_path).to eq edit_post_path(@post)
       end
 
       it "他のユーザの投稿にも削除リンクがあり、機能していること" do
         visit post_path(@post)
-        click_link "削除"
+        click_link "Delete"
         expect{
-          expect(page.accept_confirm).to eq "#{@post.title}を削除します。よろしいですか？"
-          expect(page).to have_content "#{@post.title}を削除しました"
+          expect(page.accept_confirm).to eq "#{@post.title} will be deleted. Are you sure?"
+          expect(page).to have_content "#{@post.title} deleted successfully."
           }.to change(@user.posts, :count).by(-1)
       end
     end
@@ -220,7 +204,7 @@ RSpec.describe "Posts", type: :system do
     context "ログインしていないとき" do
       it "ログインを促されること" do
         visit new_post_path
-        expect(page).to have_content "アカウント登録もしくはログインしてください"
+        expect(page).to have_content "You need to sign in or sign up before continuing."
       end
     end
 
@@ -231,44 +215,41 @@ RSpec.describe "Posts", type: :system do
         @post = FactoryBot.create(:post, user_id: @user.id)
         @other_post = FactoryBot.create(:other_post, user_id: @other_user.id)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"
       end
   
       it "投稿を作成できること" do
         visit new_post_path
         expect {
-          click_link "アニメ登録", match: :first
-          fill_in "タイトル", with: "コードギアス"
-          fill_in "タグ", with: "バトル"
-          attach_file "作品画像", "#{Rails.root}/spec/factories/コードギアス.jpeg"
-          fill_in "話数", with: 50
-          fill_in "放送日", with: "2006年秋"
-          fill_in "声優", with: "福山潤/ゆかな"
-          fill_in "制作", with: "サンライズ"
-          fill_in "好きなシーン", with: "撃っていいのは撃たれる覚悟のある奴だけだ"
-          click_button "登録する" 
+          fill_in "Title", with: "コードギアス"
+          fill_in "Tag name", with: "バトル"
+          attach_file "Image", "#{Rails.root}/spec/factories/コードギアス.jpeg"
+          fill_in "Episode", with: 50
+          fill_in "Broadcast", with: "2006年秋"
+          fill_in "Cast", with: "福山潤/ゆかな"
+          fill_in "Staff", with: "サンライズ"
+          fill_in "Favorite scene", with: "撃っていいのは撃たれる覚悟のある奴だけだ"
+          click_button "Register" 
           expect(page).to have_content "バトル"   # タグが表示されているか
-          expect(page).to have_content "コードギアスを投稿しました"
+          expect(page).to have_content "コードギアス posted successfully."
         }.to change(@user.posts, :count).by(1)
       end
 
       it "タイトルが未入力だと失敗すること" do
         visit new_post_path
-        click_link "アニメ登録", match: :first
-        fill_in "タイトル", with: nil
-        click_button "登録する"
-        expect(page).to have_content "タイトルを入力してください"
+        fill_in "Title", with: nil
+        click_button "Register"
+        expect(page).to have_content "Title can't be blank"
       end
 
       it "タイトル以外が未入力でも登録できること" do
         visit new_post_path
-        click_link "アニメ登録", match: :first
-        fill_in "タイトル", with: "名探偵コナン"
-        click_button "登録する"
-        expect(page).to have_content "名探偵コナンを投稿しました"
-        expect(current_path).to eq posts_path
+        fill_in "Title", with: "名探偵コナン"
+        click_button "Register"
+        expect(page).to have_content "名探偵コナン posted successfully."
+        expect(current_path).to eq root_path
       end
     end
     # 管理ユーザも登録できるが不適切な投稿削除が目的のため省略
@@ -282,7 +263,7 @@ RSpec.describe "Posts", type: :system do
       end
 
       it "ログインが促されること" do
-        expect(page).to have_content "アカウント登録もしくはログインしてください"
+        expect(page).to have_content "You need to sign in or sign up before continuing."
       end
     end
 
@@ -293,33 +274,33 @@ RSpec.describe "Posts", type: :system do
         @post = FactoryBot.create(:post, user_id: @user.id)
         @other_post = FactoryBot.create(:other_post, user_id: @other_user.id)
         visit new_user_session_path
-        fill_in "Eメール", with: @user.email
-        fill_in "パスワード", with: @user.password
-        click_button "ログイン"  
+        fill_in "Email", with: @user.email
+        fill_in "Password", with: @user.password
+        click_button "Log in"  
       end
 
       it "更新できること" do
         visit edit_post_path(@post)
         expect {
-          fill_in "タイトル", with: "コードギアス 反逆のルルーシュ"
-          fill_in "声優", with: "福山潤/ゆかな/小清水亜美/櫻井孝宏"
-          click_button "更新する" 
+          fill_in "Title", with: "コードギアス 反逆のルルーシュ"
+          fill_in "Cast", with: "福山潤/ゆかな/小清水亜美/櫻井孝宏"
+          click_button "Register" 
         }.to change(Post, :count).by(0)
         expect(@post.reload.title).to eq "コードギアス 反逆のルルーシュ"
         expect(@post.reload.cast).to eq "福山潤/ゆかな/小清水亜美/櫻井孝宏"
-        expect(page).to have_content "#{@post.title}を更新しました"
+        expect(page).to have_content "#{@post.title} updated successfully."
       end
 
       it "タイトルがないと更新できないこと" do
         visit edit_post_path(@post)
-        fill_in "タイトル", with: nil
-        click_button "更新する"
-        expect(page).to have_content "タイトルを入力してください"
+        fill_in "Title", with: nil
+        click_button "Register"
+        expect(page).to have_content "Title can't be blank"
       end
 
       it "他のユーザーの編集ページにはいけないこと" do
         visit edit_post_path(@other_post)
-        expect(page).to have_content "権限がありません"
+        expect(page).to have_content "You're not authorized."
       end
     end
 
@@ -329,21 +310,21 @@ RSpec.describe "Posts", type: :system do
         @user = FactoryBot.create(:user)
         @post = FactoryBot.create(:post, user_id: @user.id)
         visit new_user_session_path
-        fill_in "Eメール", with: @admin_user.email
-        fill_in "パスワード", with: @admin_user.password
-        click_button "ログイン"  
+        fill_in "Email", with: @admin_user.email
+        fill_in "Password", with: @admin_user.password
+        click_button "Log in"  
       end
 
       it "他のユーザーの投稿も更新できること" do
         visit edit_post_path(@post)
         expect {
-          fill_in "タイトル", with: "コードギアス 反逆のルルーシュ"
-          fill_in "声優", with: "福山潤/ゆかな/小清水亜美/櫻井孝宏"
-          click_button "更新する" 
+          fill_in "Title", with: "コードギアス 反逆のルルーシュ"
+          fill_in "Cast", with: "福山潤/ゆかな/小清水亜美/櫻井孝宏"
+          click_button "Register" 
         }.to change(Post, :count).by(0)
         expect(@post.reload.title).to eq "コードギアス 反逆のルルーシュ"
         expect(@post.reload.cast).to eq "福山潤/ゆかな/小清水亜美/櫻井孝宏"
-        expect(page).to have_content "#{@post.title}を更新しました"
+        expect(page).to have_content "#{@post.title} updated successfully."
       end
     end
   end
