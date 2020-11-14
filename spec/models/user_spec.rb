@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
     FactoryBot.create(:user, email: "hoge@example.com")
     user = FactoryBot.build(:user, email: "hoge@example.com")
     user.valid?
-    expect(user.errors[:email]).to include("はすでに存在します")
+    expect(user.errors[:email]).to include("has already been taken")
   end
   # 複数のユーザーで何かする
   it "does something with multiple users" do
@@ -36,12 +36,12 @@ RSpec.describe User, type: :model do
   it "is guest if name is blank" do
     user = FactoryBot.create(:user, name: nil)
     user.valid?
-    expect(user[:name]).to include("ゲスト")
+    expect(user[:name]).to include("Guest")
   end
   # favorite_animeを入力しない場合は「未登録」になること
   it "is 「未登録」 if favorite_anime is blank" do
     user = FactoryBot.create(:user, favorite_anime: nil)
     user.valid?
-    expect(user[:favorite_anime]).to include("未登録")
+    expect(user[:favorite_anime]).to include("Unregistered")
   end
 end

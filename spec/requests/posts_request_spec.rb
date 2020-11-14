@@ -40,7 +40,7 @@ RSpec.describe "Posts", type: :request do
 
       it "一覧ページにリダイレクトすること" do
         patch post_url @post, params: { post: FactoryBot.attributes_for(:other_post) }
-        expect(response).to redirect_to posts_path
+        expect(response).to redirect_to root_path
       end
 
       it "パラメータが不正な場合更新されないこと" do
@@ -51,7 +51,7 @@ RSpec.describe "Posts", type: :request do
 
       it "パラメータが不正な場合エラーが表示されること" do
         patch post_url @post, params: { post: FactoryBot.attributes_for(:post, :invalid) }
-        expect(body).to include("タイトルを入力してください")
+        expect(response.body).to include "Title can't be blank"
       end
 
     end
@@ -109,7 +109,7 @@ RSpec.describe "Posts", type: :request do
 
       it "投稿一覧にリダイレクトすること" do
         delete post_url @post
-        expect(response).to redirect_to posts_path
+        expect(response).to redirect_to root_path
       end
 
     end
@@ -129,7 +129,7 @@ RSpec.describe "Posts", type: :request do
       it "他のユーザーの投稿は削除できないこと" do
         @post = FactoryBot.create(:post, user_id: @other_user.id)
         delete post_url @post
-        expect(flash.notice).to include("権限がありません") 
+        expect(flash.notice).to include("You're not authorized.") 
       end
     end
 
