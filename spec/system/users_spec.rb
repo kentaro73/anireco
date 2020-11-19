@@ -113,6 +113,15 @@ RSpec.describe "Users", type: :system do
       expect(page).to have_link "佐藤健"
     end
 
+    it "31文字以上の名前は登録できないこと" do
+      fill_in "Name", with: "a"*31
+      fill_in "Email", with: "satoutakeru@example.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
+      expect(page).to have_selector 'li', text: "Name is too long"
+    end
+
     it "メールアドレスがないと登録できないこと" do
       fill_in "Name", with: "佐藤健"
       fill_in "Favorite anime", with: "るろうに剣心"
@@ -158,6 +167,16 @@ RSpec.describe "Users", type: :system do
       click_button "Sign up"
       expect(current_path).to eq root_path
       expect(page).to have_content "Welcome! You have signed up successfully."
+    end
+
+    it "好きなアニメが101文字以上だと詳細ページでUnregisteredとなること" do
+      fill_in "Email", with: "satoutakeru@example.com"
+      fill_in "Favorite anime", with: "a"*101
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
+      click_link "Guest"
+      expect(page).to have_content "Unregistered"
     end
   end
 

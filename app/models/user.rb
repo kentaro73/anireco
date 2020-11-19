@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :name, length: { maximum: 30 }
+  validates :favorite_anime, length: { maximum: 100 }
   before_validation :set_favorite_anime
   before_validation :set_nameless_name
   has_one_attached :avatar, dependent: :destroy
@@ -11,9 +13,11 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
 
+
   def set_nameless_name
     self.name = "Guest" if name.blank?
   end
+
 
   def set_favorite_anime
     self.favorite_anime = "Unregistered" if favorite_anime.blank?
