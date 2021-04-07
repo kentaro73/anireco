@@ -14,7 +14,7 @@
     span= link_to "Edit", edit_user_registration_path, class: "btn btn-outline-success mr-2"
 .user-posted
   .watched-anime.pt-3
-    p Registered animation
+    p Your posts
   .episode-count
     span Total: 
     span= "#{@user.posts.all.sum(:episode)} episodes"

@@ -32,7 +32,7 @@ RSpec.describe "UserAuthentications", type: :request do
       end
       it "エラーが表示されること" do
         post user_registration_path, params: { user: invalid_user_params }
-        expect(body).to include("errors prohibited this user from being saved")
+        expect(response.body).to include("2 errors prohibited this user from being saved")
       end
     end
   end

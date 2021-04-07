@@ -48,6 +48,11 @@ RSpec.describe "Comments", type: :system do
         expect(page).to have_content "私もこの作品が好きです"
       end
 
+      it "空白のコメントだとアラート文が出ること" do
+        click_button "Comment"
+        expect(page).to have_content "入力してください"
+      end
+
       it "削除できること" do
         click_link "Delete"
         expect{

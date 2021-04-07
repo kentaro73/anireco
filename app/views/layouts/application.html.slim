@@ -24,7 +24,7 @@ html
           - if current_user
             li.nav-item= link_to "Animations", root_path, class: "nav-link"
             li.nav-item= link_to "Favorite", "/like_lists", class: "nav-link"
-            li.nav-item= link_to "", new_post_path, class: "nav-link"
+            li.nav-item= link_to "Posting", new_post_path, class: "nav-link"
             li.nav-item= link_to 'Logout', destroy_user_session_path, method: :delete,  class: 'nav-link'
           - else 
             li.nav-item= link_to "Animations", root_path, class: "nav-link"

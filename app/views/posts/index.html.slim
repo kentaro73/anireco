@@ -13,7 +13,7 @@
     .pagenation
       = paginate @posts
     .post-btn
-      = link_to "Register", new_post_path,  class: "btn btn-primary"
+      = link_to "Post", new_post_path,  class: "btn btn-primary"
     
     .tag_bottom.m-3
       = render partial: "tag", locals: { tag_list: @tag_list }

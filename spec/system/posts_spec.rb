@@ -52,6 +52,11 @@ RSpec.describe "Posts", type: :system do
         expect(current_path).to eq "/like_lists"
       end
 
+      it "投稿ページへのリンクが機能していること" do
+        click_link "Posting"
+        expect(current_path).to eq new_post_path
+      end
+
       it "ログアウトリンクが機能していること" do
         click_link "Logout"
         expect(page).to have_content "Signed out successfully."
@@ -231,7 +236,7 @@ RSpec.describe "Posts", type: :system do
           fill_in "Cast", with: "福山潤/ゆかな"
           fill_in "Staff", with: "サンライズ"
           fill_in "Favorite scene", with: "撃っていいのは撃たれる覚悟のある奴だけだ"
-          click_button "Register" 
+          click_button "Post" 
           expect(page).to have_content "バトル"   # タグが表示されているか
           expect(page).to have_content "コードギアス posted successfully."
         }.to change(@user.posts, :count).by(1)
@@ -240,14 +245,14 @@ RSpec.describe "Posts", type: :system do
       it "タイトルが未入力だと失敗すること" do
         visit new_post_path
         fill_in "Title", with: nil
-        click_button "Register"
+        click_button "Post"
         expect(page).to have_content "Title can't be blank"
       end
 
       it "タイトル以外が未入力でも登録できること" do
         visit new_post_path
         fill_in "Title", with: "名探偵コナン"
-        click_button "Register"
+        click_button "Post"
         expect(page).to have_content "名探偵コナン posted successfully."
         expect(current_path).to eq root_path
       end
@@ -284,7 +289,7 @@ RSpec.describe "Posts", type: :system do
         expect {
           fill_in "Title", with: "コードギアス 反逆のルルーシュ"
           fill_in "Cast", with: "福山潤/ゆかな/小清水亜美/櫻井孝宏"
-          click_button "Register" 
+          click_button "Post" 
         }.to change(Post, :count).by(0)
         expect(@post.reload.title).to eq "コードギアス 反逆のルルーシュ"
         expect(@post.reload.cast).to eq "福山潤/ゆかな/小清水亜美/櫻井孝宏"
@@ -294,7 +299,7 @@ RSpec.describe "Posts", type: :system do
       it "タイトルがないと更新できないこと" do
         visit edit_post_path(@post)
         fill_in "Title", with: nil
-        click_button "Register"
+        click_button "Post"
         expect(page).to have_content "Title can't be blank"
       end
 
@@ -320,7 +325,7 @@ RSpec.describe "Posts", type: :system do
         expect {
           fill_in "Title", with: "コードギアス 反逆のルルーシュ"
           fill_in "Cast", with: "福山潤/ゆかな/小清水亜美/櫻井孝宏"
-          click_button "Register" 
+          click_button "Post" 
         }.to change(Post, :count).by(0)
         expect(@post.reload.title).to eq "コードギアス 反逆のルルーシュ"
         expect(@post.reload.cast).to eq "福山潤/ゆかな/小清水亜美/櫻井孝宏"
