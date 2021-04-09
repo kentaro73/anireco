@@ -12,7 +12,7 @@
 .user-posted
   .watched-anime.pt-3
     p Your posts
-  .episode-count
+  .episode-count.text-right
     span Total: 
     span= "#{@user.posts.all.sum(:episode)} episodes"
 
