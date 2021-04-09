@@ -1,17 +1,14 @@
 .user-top
-  .user-icon
+  .user-icon.text-center
     - if @user.avatar.attached?
-      = image_tag @user.avatar, size: "100x100", class: 'rounded-circle'
+      = image_tag @user.avatar, size: "300x300", class: 'rounded-circle'
     - else
       = image_tag "default_icon.png", size: "100x100", class: 'rounded-circle'
-    .user-name.pl-3
+    .user-name.
       = @user.name
-  .favorite_anime.pt-3
-    span Favorite anime:
-    p= @user.favorite_anime
 - if current_user&.id == @user.id
-  .edit-and-delete.mt-3.text-right
-    span= link_to "Edit", edit_user_registration_path, class: "btn btn-outline-success mr-2"
+  .edit-and-delete.mt-3.text-center
+    span= link_to "Edit", edit_user_registration_path, class: "btn btn-outline-success"
 .user-posted
   .watched-anime.pt-3
     p Your posts
