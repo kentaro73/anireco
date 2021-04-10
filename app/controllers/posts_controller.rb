@@ -10,11 +10,11 @@ class PostsController < ApplicationController
       @tag_list = Tag.all
       @tag = Tag.find(params[:tag_id])
       @search_params = post_search_params
-      @posts = Post.search(@search_params).page(params[:page]).per(9)
+      @posts = Post.search(@search_params).page(params[:page]).per(9).includes(:user)
     else
       @tag_list = Tag.all
       @search_params = post_search_params
-      @posts = Post.search(@search_params).page(params[:page]).per(9)
+      @posts = Post.search(@search_params).page(params[:page]).per(9).includes(:user)
     end
   end
 
